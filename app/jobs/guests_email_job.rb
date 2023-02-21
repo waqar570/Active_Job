@@ -1,7 +1,9 @@
 class GuestsEmailJob < ApplicationJob
   queue_as :default
+  after_perform : ArticlesController.create
 
-  def perform(*args)
-    puts "My Name Is Waqar"
+  #around_perform :around_email
+  def perform()
+    TechscoopMailer.welcome_email.deliver_now
   end
 end
